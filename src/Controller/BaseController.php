@@ -19,5 +19,11 @@ class BaseController extends AbstractController
         ]);
     }
 
+    #[Route('/ml', name: 'mention')]
+    public function ml(): Response
+    { 
+        return $this->render('mentions_legales/mentionslegales.html.twig', [
+        ]);
+    }
     
 }
