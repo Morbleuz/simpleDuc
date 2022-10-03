@@ -25,6 +25,7 @@ class BaseController extends AbstractController
                 $em->flush();
               
                 $this->addFlash('notice', 'message envoyé');
+                return $this->redirectToRoute('app_base');
             }
         }
         return $this->render('base/index.html.twig', [
