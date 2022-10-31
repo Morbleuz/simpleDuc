@@ -14,6 +14,7 @@ class BaseController extends AbstractController
     #[Route('/', name: 'app_base')]
     public function index(Request $request): Response
     {   
+
         $contact = new Contact();
         $form =  $this->createForm(ContactType::class,$contact);
 
@@ -34,7 +35,7 @@ class BaseController extends AbstractController
     }
 
     #[Route('/mention_legale', name: 'mention')]
-    public function ml(): Response
+    public function mentionlegales(): Response
     { 
         return $this->render('mentions_legales/mentionslegales.html.twig', [
         ]);

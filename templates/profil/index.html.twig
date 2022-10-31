@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+{% if app.user %}
+
+<div class="w3-container w3-center">
+    {% if app.user.rib is defined %}
+    <h1>Vous êtes un employe</h1>
+    {% else %}
+    <h1>Vous êtes un user</h1>
+    {% endif %}
+    <h2>Bienvenue {{app.user.prenom}} sur vôtre profil</h3>
+        <p>Vous pouvez modifer ici vôtre RIB,...</p>
+</div>
+{% else %}
+<h2>Vous ne pouvez pas accéder à cette page</h2>
+{% endif %}
+{% endblock %}
