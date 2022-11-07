@@ -5,38 +5,34 @@
 {% block body %}
 <form method="post">
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
+    <div class="mb-3">
+        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
     {% endif %}
 
-    {#
-    <label for="inputEmail">Email</label>
+    <!-- <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <label for="inputPassword">Password</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    #}
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+    -->
 
-    <div class="w3-container w3-center" style="margin-left: auto; margin-right: auto; margin-top:48px; width: 70%; height: 800px; background: url({{ asset('images/stockOffice.jpg') }}) no-repeat 0 100%; background-size: 100%;">
+    <div class="w3-container w3-center" style="margin-left: auto; margin-right: auto; margin-top:0px; width: 70%; height: 800px; background: url({{ asset('images/stockOffice.jpg') }}) no-repeat 0 100%; background-size: cover;">
         <div class="w3-container w3-center" style="width:30%; height: 575px; border: 1px black solid;position: absolute; margin: auto; top:0; bottom: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, .9)">
             <img src="{{ asset('images/logo-noBG.png') }}" style="width: 27%; height: 22%;">
             <br>
             <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter.</h1>
-
-            {{ form_start(loginForm) }}
-            <br>
-            {{ form_row(loginForm.email) }}
-            <br>
-            {{ form_row(loginForm.password) }}
-            <br>
-
-            {{ form_row(loginForm.envoyer, {label: 'Envoyer'}) }}
-
-            {{ form_end(loginForm) }}
+            <input type="email" placeholder="Email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control w3-input w3-border" autocomplete="email" required autofocus><br>
+            <input type="password" placeholder="Mot de passe" name="password" id="inputPassword" class="form-control w3-input w3-border" autocomplete="current-password" required><br>
+            <button class="w3-button w3-black w3-section" type="submit">
+                Connexion
+            </button>
         </div>
     </div>
 
@@ -44,9 +40,7 @@
     <img src="{{ asset('images/stockOffice.jpg') }}" style="width: 60%; height: 60%;">
     -->
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
