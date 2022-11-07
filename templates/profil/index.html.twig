@@ -3,16 +3,20 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
+<!--Ici on vérifie que le user est bien connecté-->
 {% if app.user %}
 
 <div class="w3-container w3-center">
+    <!--On vérifie qu'il contient bien un RIB pour voir si c'est bien un employe-->
     {% if app.user.rib is defined %}
     <h1>Vous êtes un employe</h1>
     {% else %}
     <h1>Vous êtes un user</h1>
     {% endif %}
-    <h2>Bienvenue {{app.user.prenom}} sur vôtre profil</h3>
+    <h2>Bienvenue {{app.user.nom |upper}} {{app.user.prenom}} !</h3>
         <p>Vous pouvez modifer ici vôtre RIB,...</p>
+        {{form(form)}}
+
 </div>
 {% else %}
 <h2>Vous ne pouvez pas accéder à cette page</h2>
