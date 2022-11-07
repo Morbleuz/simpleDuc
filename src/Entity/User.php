@@ -16,7 +16,7 @@ use App\Entity\ResponsableRH;
 #[ORM\DiscriminatorColumn(name:"type", type:"string")]
 #[ORM\DiscriminatorMap(['employee' => Employe::class, 'responsable' => ResponsableRH::class])]
 
-abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
