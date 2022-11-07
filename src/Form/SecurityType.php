@@ -17,7 +17,7 @@ class SecurityType extends AbstractType
         $builder
             ->add('email', EmailType::class,['label'=> false, 'attr' => ['class'=> 'w3-input w3-border', 'placeholder' => 'Email']])
             ->add('password', PasswordType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Mot de passe']])
-            ->add('envoyer', SubmitType::class,['label'=> 'Envoyer', 'attr' => ['class'=> 'w3-button w3-black w3-section']] )
+            ->add('envoyer', SubmitType::class,['label'=> 'Envoyer', 'attr' => ['class'=> 'w3-button w3-black w3-section']])
         ;
     }
 
