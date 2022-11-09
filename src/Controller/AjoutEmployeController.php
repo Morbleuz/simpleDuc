@@ -42,7 +42,7 @@ class AjoutEmployeController extends AbstractController
         ]);
     }
 
-    #[Route('/ajout/employerh', name: 'app_ajout_employe')]
+    #[Route('/ajout/employerh', name: 'app_ajout_employerh')]
     public function employerh(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $employe = new Employe();
