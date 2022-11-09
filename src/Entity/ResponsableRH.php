@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: ResponsableRHRepository::class)]
-class ResponsableRH extends User
+class ResponsableRH extends Employe
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

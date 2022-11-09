@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Employe;
 use App\Entity\User;
+use App\Entity\ResponsableRH;
+
 use App\Form\EmployeType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -45,7 +47,7 @@ class AjoutEmployeController extends AbstractController
     #[Route('/ajout/employerh', name: 'app_ajout_employerh')]
     public function employerh(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        $employe = new Employe();
+        $employe = new ResponsableRH();
         $form = $this->createForm(EmployeType::class, $employe);
 
 
