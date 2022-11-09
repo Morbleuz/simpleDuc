@@ -24,8 +24,11 @@
                 <a href="{{path('mention')}}" class="w3-bar-item w3-button">Mentions légales</a>
                 <a href="#contact" class="w3-bar-item w3-button">Contactez-nous</a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{path('app_login')}}" class="w3-bar-item w3-button"><i class="fa fa-folder"></i></a>
                 <a href="{{path('app_profil')}}" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
                 <a href="{{path('app_logout')}}" class="w3-bar-item w3-button"><i class="fa fa-close"></i></a>
+
+
                 {% endif %}
             </div>
         </div>
