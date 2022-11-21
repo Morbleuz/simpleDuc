@@ -12,9 +12,15 @@
     <div class="mb-3">
         Vous êtes connecté avec l'email {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">déconnexion</a>
     </div>
+    <!--Si l'utilisateur est connecté alors on vérifie son Type-->
     {% if app.user.rib is defined %}
     Vous êtes connecté en tant qu'employé
     {% endif %}
+
+    {% if app.user.annonces is defined %}
+    Vous êtes aussi un responsableRH
+    {% endif %}
+
     {% else %}
     <!-- <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>

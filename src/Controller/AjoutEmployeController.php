@@ -15,10 +15,27 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 class AjoutEmployeController extends AbstractController
-{
+{   
+
+    function checkIfIsEmployeRH()
+    {
+        //Vérification de l'employe
+        if($this->getUser() == null){
+            return $this->redirectToRoute('app_base');
+        }else{
+            if(!$this->getUser() instanceof ResponsableRH){
+                return $this->redirectToRoute('app_base');
+            }
+        }
+    }
+
     #[Route('/ajout/employe', name: 'app_ajout_employe')]
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+        //On vérifie si l'utilisateur connecté est un employe RH
+        $this->checkIfIsEmployeRH();
+
+
         $employe = new Employe();
         $form = $this->createForm(EmployeType::class, $employe);
 

@@ -21,11 +21,6 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
         }
 
-        if($this->getUser()){
-            dump($this->getUser());
-        }
-
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user

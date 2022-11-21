@@ -4,8 +4,12 @@
 
 {% block body %}
 <div class="w3-container w3-center">
+    {% if app.user.annonces is defined %}
     <h2>Ajout d'un employé</h2>
     {{form(form)}}
+    {% else %}
+    <h2>Vous n'avez pas les droits d'ajouter un employé</h2>
+    {% endif %}
 </div>
 
 {% endblock %}
