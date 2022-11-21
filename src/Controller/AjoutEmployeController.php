@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mime\Address;
 
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
@@ -64,6 +66,7 @@ class AjoutEmployeController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted()&&$form->isValid()){
                 $password = $this->randomPassword();
+
                 $employe->setPassword(
                     $userPasswordHasher->hashPassword(
                         $employe,
@@ -71,15 +74,16 @@ class AjoutEmployeController extends AbstractController
                     )
                 );
 
-                $email = (new Email())
-                ->from('simpleduc@no-reply.fr')
+                $email = (new TemplatedEmail())
+                ->from(new Address('simpleduc@no-reply.fr', 'SimpleDuc'))
                 ->to($employe->getEmail())
-                //->cc('cc@example.com')
-                //->bcc('bcc@example.com')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
                 ->subject('Création de vôtre compte !')
-                ->html('<p>Vôtre mot de pass est <strong>"'.$password.'"</strong> !</p>');
+                ->htmlTemplate('email/newemploye.html.twig')
+                ->context([
+                    'password' => $password,
+
+                ])
+            ;
     
                 $mailer->send($email);
 
