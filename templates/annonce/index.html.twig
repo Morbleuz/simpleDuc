@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AnnonceController!{% endblock %}
+
+{% block body %}
+<html>
+<br>
+<p>Retrouverez ici les différentes annonces.</p>
+<div class="w3-dropdown-click">
+    <button onclick="myFunction()" class="w3-button">Click Me</button>
+    <div id="Demo" class="w3-dropdown-content w3-bar-block w3-animate-zoom">
+        <a href="#" class="w3-bar-item w3-button">Link 1</a>
+
+    </div>
+</div>
+<p class="w3-container">{{form(form)}}</p>
+<script>
+    function myFunction() {
+        var x = document.getElementById("Demo");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+
+</html>{% endblock %}
