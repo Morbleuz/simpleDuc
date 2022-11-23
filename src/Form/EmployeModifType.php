@@ -17,9 +17,6 @@ class EmployeModifType extends AbstractType
             ->add('email')
             ->add('Nom')
             ->add('Prenom')
-            ->add('RIB')
-            ->add('NombreHeures')
-            ->add('Adresse')
             ->add('Sexe')
             ->add('Envoyer', SubmitType::class)
 

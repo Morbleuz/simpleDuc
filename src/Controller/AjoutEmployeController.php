@@ -39,24 +39,9 @@ class AjoutEmployeController extends AbstractController
         return implode($pass); //turn the array into a string
     }
 
-    function checkIfIsEmployeRH()
-    {
-        //Vérification de l'employe
-        if($this->getUser() == null){
-            return $this->redirectToRoute('app_base');
-        }else{
-            if(!$this->getUser() instanceof ResponsableRH){
-                return $this->redirectToRoute('app_base');
-            }
-        }
-    }
-
-    #[Route('/ajout/employe', name: 'app_ajout_employe')]
+    #[Route('responsablerh/ajout/employe', name: 'app_ajout_employe')]
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher,MailerInterface $mailer): Response
     {
-        //On vérifie si l'utilisateur connecté est un employe RH
-        $this->checkIfIsEmployeRH();
-
 
         $employe = new Employe();
         $form = $this->createForm(EmployeType::class, $employe);
@@ -73,6 +58,7 @@ class AjoutEmployeController extends AbstractController
                         $password
                     )
                 );
+                $employe->setRoles(array('ROLE_EMP'));
 
                 $email = (new TemplatedEmail())
                 ->from(new Address('simpleduc@no-reply.fr', 'SimpleDuc'))
@@ -82,9 +68,7 @@ class AjoutEmployeController extends AbstractController
                 ->context([
                     'password' => $password,
 
-                ])
-            ;
-    
+                ]);
                 $mailer->send($email);
 
 
@@ -101,7 +85,7 @@ class AjoutEmployeController extends AbstractController
         ]);
     }
 
-    #[Route('/ajout/employerh', name: 'app_ajout_employerh')]
+    #[Route('responsablerh/ajout/employerh', name: 'app_ajout_employerh')]
     public function employerh(Request $request, UserPasswordHasherInterface $userPasswordHasher,MailerInterface $mailer): Response
     {
         $employe = new ResponsableRH();
@@ -112,24 +96,26 @@ class AjoutEmployeController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted()&&$form->isValid()){
                 $em = $this->getDoctrine()->getManager();
-                $email = (new Email())
-                ->from('simpleduc@no-reply.fr')
-                ->to($employe->getEmail())
-                //->cc('cc@example.com')
-                //->bcc('bcc@example.com')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('Création de vôtre compte !')
-                ->text('text')
-                ->html('<p>See Twig integration for better HTML integration!</p>');
-    
-                $mailer->send($email);
+                $password = $this->randomPassword();
                 $employe->setPassword(
                     $userPasswordHasher->hashPassword(
                         $employe,
-                        $form->get('password')->getData()
+                        $password
                     )
                 );
+                $employe->setRoles(array('ROLE_RESP'));
+                
+                $email = (new TemplatedEmail())
+                ->from(new Address('simpleduc@no-reply.fr', 'SimpleDuc'))
+                ->to($employe->getEmail())
+                ->subject('Création de vôtre compte !')
+                ->htmlTemplate('email/newemploye.html.twig')
+                ->context([
+                    'password' => $password,
+
+                ]);
+                $mailer->send($email);
+
                 //$user->setEmail($form->get("email")->getData());
                 $em->persist($employe);
                 $em->flush();
@@ -141,8 +127,8 @@ class AjoutEmployeController extends AbstractController
         ]);
     }
 
-    #[Route('/ajout/developpeur', name: 'app_ajout_developpeur')]
-    public function developpeur(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
+    #[Route('responsablerh/ajout/developpeur', name: 'app_ajout_developpeur')]
+    public function developpeur(Request $request, UserPasswordHasherInterface $userPasswordHasher,MailerInterface $mailer): Response
     {
         $developpeur = new Developpeur();
         $form = $this->createForm(DeveloppeurType::class, $developpeur);
@@ -152,12 +138,27 @@ class AjoutEmployeController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted()&&$form->isValid()){
                 $em = $this->getDoctrine()->getManager();
+
+                $password = $this->randomPassword();
+
                 $developpeur->setPassword(
                     $userPasswordHasher->hashPassword(
-                        $employe,
-                        $form->get('password')->getData()
+                        $developpeur,
+                        $password
                     )
                 );
+                
+                $email = (new TemplatedEmail())
+                ->from(new Address('simpleduc@no-reply.fr', 'SimpleDuc'))
+                ->to($developpeur->getEmail())
+                ->subject('Création de vôtre compte !')
+                ->htmlTemplate('email/newemploye.html.twig')
+                ->context([
+                    'password' => $password,
+                ])
+            ;
+    
+                $mailer->send($email);
                 //$user->setEmail($form->get("email")->getData());
                 $em->persist($developpeur);
                 $em->flush();

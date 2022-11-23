@@ -13,7 +13,7 @@
         <a href="{{path('app_forgot_password_request')}}">reset password</a>
     </div>
     <div class="w3-container w3-center">
-        <h1>Bienvenue <strong>{{app.user.prenom}}</strong> dans vôtre backoffice !</h1>
+        <h1>Bienvenue <strong>{{app.user.prenom}}</strong> dans votre backoffice !</h1>
     </div>
     <div class="mb-3">
         Vous êtes connecté avec l'email {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">déconnexion</a>
@@ -29,7 +29,7 @@
         <h2>Liste des fonctionnalités</h2>
         <p>Ici vous pourrez ajouter des employés, des annonces mais égalemment modifier les informations d'un employé (son salaire)</p>
         <a href="{{path('app_ajout_employerh')}}" class="w3-button w3-black">Ajouter un employé RH</a>
-        <a href="{{path('app_ajout_employe')}}" class="w3-button w3-black">Ajouter un développeur</a>
+        <a href="{{path('app_ajout_developpeur')}}" class="w3-button w3-black">Ajouter un développeur</a>
         <!--Redéfinir le path lorsque la partie annonce sera fini-->
         <a href="{{path('app_base')}}" class="w3-button w3-black">Ajouter une annonce</a>
 
@@ -57,6 +57,7 @@
             <button class="w3-button w3-black w3-section" type="submit">
                 Connexion
             </button>
+            <a href="{{path('app_forgot_password_request')}}" class="w3-button w3-black">Mot de passe oublié ?</a>
         </div>
     </div>
 
