@@ -21,12 +21,8 @@ class Tache
     #[ORM\Column]
     private ?bool $estFaite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Taches')]
-    private ?Developpeur $developpeur = null;
-
     public function __construct()
     {
-        $this->developpeurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,18 +50,6 @@ class Tache
     public function setEstFaite(bool $estFaite): self
     {
         $this->estFaite = $estFaite;
-
-        return $this;
-    }
-
-    public function getDeveloppeur(): ?Developpeur
-    {
-        return $this->developpeur;
-    }
-
-    public function setDeveloppeur(?Developpeur $developpeur): self
-    {
-        $this->developpeur = $developpeur;
 
         return $this;
     }

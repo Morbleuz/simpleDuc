@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des employés{% endblock %}
+
+{% block body %}
+<div class="w3-container w3-center">
+    <h1>Liste des employés</h1>
+    <p>Ici vous pourrez consulter la liste des employés et modifer des informations les concernants.</p>
+    <table class="w3-table w3-striped">
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>RIB</th>
+            <th>Nombres d'heures</th>
+        </tr>
+        {% for employe in employes %}
+        <tr>
+            <td>{{employe.nom}}</td>
+            <td>{{employe.prenom}}</td>
+            <td>{{employe.email}}</td>
+            <td>{% if employe.rib is null %}
+                Non défini
+                {% else %}
+                {{employe.rib}}
+                {% endif %}
+            </td>
+            <td>{% if employe.nombreheures is null %}
+                <input type="number" value="0">
+                {% else %}
+                <input type="number" value="{{employe.nombreheures}}">
+
+                {% endif %}
+            </td>
+            <td><a href="">Delete</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+{% endblock %}

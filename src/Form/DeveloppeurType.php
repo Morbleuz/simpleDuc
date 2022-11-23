@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Employe;
+use App\Entity\Developpeur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,8 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
-
-class EmployeType extends AbstractType
+class DeveloppeurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -33,7 +32,7 @@ class EmployeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Employe::class,
+            'data_class' => Developpeur::class,
         ]);
     }
 }

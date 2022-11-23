@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnnonceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,15 @@ class Annonce
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $Description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'annonces')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ResponsableRH $responsableRH = null;
+
+
+    public function __construct()
+    {
+    }
 
     public function getId(): ?int
     {
@@ -93,4 +104,18 @@ class Annonce
 
         return $this;
     }
+
+    public function getResponsableRH(): ?ResponsableRH
+    {
+        return $this->responsableRH;
+    }
+
+    public function setResponsableRH(?ResponsableRH $responsableRH): self
+    {
+        $this->responsableRH = $responsableRH;
+
+        return $this;
+    }
+
+    
 }
