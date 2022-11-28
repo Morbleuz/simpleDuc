@@ -20,7 +20,7 @@ class CreateannonceType extends AbstractType
         ->add('Nom', TextType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Titre de l\'annonce']])
         ->add('Post', TextType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Poste a Promouvoir']])
         ->add('Salaire', IntegerType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Salaire De Base']])
-        ->add('Qualification', IntegerType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Qualification']])
+        ->add('Qualification', TextType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Qualification']])
         ->add('Description', TextAreaType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Description']])
         ->add('envoyer', SubmitType::class,['label'=> 'Envoyer', 'attr' => ['class'=> 'w3-button w3-black w3-section']] )
             
