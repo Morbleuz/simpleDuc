@@ -11,10 +11,6 @@ use App\Entity\User;
 #[ORM\Entity(repositoryClass: ResponsableRHRepository::class)]
 class ResponsableRH extends Employe
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
     #[ORM\OneToMany(mappedBy: 'responsableRH', targetEntity: Annonce::class, orphanRemoval: true)]
     private Collection $annonces;
@@ -22,11 +18,6 @@ class ResponsableRH extends Employe
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     /**

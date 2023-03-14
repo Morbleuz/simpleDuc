@@ -40,7 +40,7 @@ class EmployesFixtures extends Fixture
         $manager->persist($developpeur);
 
         $resp = new ResponsableRH();
-        $resp->setEmail("Responsable@simpleduc.fr");
+        $resp->setEmail("responsable@simpleduc.fr");
         $resp->setPassword("motdepasse");
         $resp->setRoles(array("ROLE_RESP"));
         $resp->setNom("NomRH");

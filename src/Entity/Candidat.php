@@ -22,9 +22,6 @@ class Candidat
     #[ORM\Column(length: 150)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 200)]
-    private ?string $NomDuPoste = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -66,15 +63,4 @@ class Candidat
         return $this;
     }
 
-    public function getNomDuPoste(): ?string
-    {
-        return $this->NomDuPoste;
-    }
-
-    public function setNomDuPoste(string $NomDuPoste): self
-    {
-        $this->NomDuPoste = $NomDuPoste;
-
-        return $this;
-    }
 }

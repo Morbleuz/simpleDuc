@@ -21,6 +21,12 @@ class Tache
     #[ORM\Column]
     private ?bool $estFaite = null;
 
+    #[ORM\ManyToOne(inversedBy: 'taches')]
+    private ?Developpeur $developpeur = null;
+
+    #[ORM\ManyToOne(inversedBy: 'taches')]
+    private ?Projet $projet = null;
+
     public function __construct()
     {
     }
@@ -50,6 +56,30 @@ class Tache
     public function setEstFaite(bool $estFaite): self
     {
         $this->estFaite = $estFaite;
+
+        return $this;
+    }
+
+    public function getDeveloppeur(): ?Developpeur
+    {
+        return $this->developpeur;
+    }
+
+    public function setDeveloppeur(?Developpeur $developpeur): self
+    {
+        $this->developpeur = $developpeur;
+
+        return $this;
+    }
+
+    public function getProjet(): ?Projet
+    {
+        return $this->projet;
+    }
+
+    public function setProjet(?Projet $projet): self
+    {
+        $this->projet = $projet;
 
         return $this;
     }

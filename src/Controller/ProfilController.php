@@ -15,7 +15,6 @@ class ProfilController extends AbstractController
     public function index(Request $request): Response
     {
         $form = $this->createForm(EmployeModifType::class, $this->getUser());
-        
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if ($form->isSubmitted()&&$form->isValid()){
