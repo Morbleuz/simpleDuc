@@ -17,12 +17,12 @@ class CreateannonceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('Nom', TextType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Titre de l\'annonce']])
-        ->add('Post', TextType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Poste a Promouvoir']])
-        ->add('Salaire', IntegerType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Salaire De Base']])
-        ->add('Qualification', TextType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Qualification']])
-        ->add('Description', TextAreaType::class,['label'=> false, 'attr' => ['class'=> 'w3-section w3-input w3-border', 'placeholder' => 'Description']])
-        ->add('envoyer', SubmitType::class,['label'=> 'Envoyer', 'attr' => ['class'=> 'w3-button w3-black w3-section']] )
+        ->add('Nom', TextType::class,['label'=> "Nom de l'annonce", 'attr' => ['class'=> 'w3-input w3-border', 'placeholder' => '']])
+        ->add('Post', TextType::class,['label'=> "Intitulé du poste", 'attr' => ['class'=> 'w3-input w3-border', 'placeholder' => '']])
+        ->add('Salaire', IntegerType::class,['label'=> "Salaire", 'attr' => ['class'=> ' w3-input w3-border', 'placeholder' => '']])
+        ->add('Qualification', TextType::class,['label'=> "Qualification", 'attr' => ['class'=> 'w3-input w3-border', 'placeholder' => '']])
+        ->add('Description', TextAreaType::class,['label'=> "Description du poste", 'attr' => ['class'=> ' w3-input w3-border', 'placeholder' => '']])
+        ->add('envoyer', SubmitType::class,['label'=> 'Envoyer', 'attr' => ['class'=> 'w3-btn w3-black w3-margin-top w3-round w3-large']] )
             
         ;
     }

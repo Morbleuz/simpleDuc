@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class AnnonceController extends AbstractController
 {
-    #[Route('/annonce', name: 'app_annonce')]
+    #[Route('/responsablerh-annonce', name: 'app_annonce')]
     public function index(Request $request,EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(CreateannonceType::class);
@@ -20,8 +20,7 @@ class AnnonceController extends AbstractController
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if ($form->isSubmitted()&&$form->isValid()){
-                $this->addFlash('notice','Votre annonce est envoyé');
-                return $this->redirectToRoute('app_annonce');
+
 
                 $titre=$form->get('Nom')->getData();
                 $poste=$form->get('Post')->getData();
@@ -37,13 +36,27 @@ class AnnonceController extends AbstractController
                 $annonce->setResponsableRH($this->getUser());
 
                 $entityManager->persist($annonce);
-                $entityManager->flush();
+                $entityManager->flush();                
+                
+                $this->addFlash('notice','Votre annonce est envoyé');
+                return $this->redirectToRoute('app_annonce');
 
             }
         }
         
         return $this->render('annonce/index.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/liste-annonce', name: 'app_liste-annonce')]
+    public function listeannonce(Request $request,EntityManagerInterface $entityManager): Response
+    {
+
+        $repoannonce = $entityManager->getRepository(Annonce::class);
+        $listeannonce = $repoannonce->findAll();
+        return $this->render('annonce/liste-annonce.html.twig', [
+            "annonces" => $listeannonce
         ]);
     }
 }

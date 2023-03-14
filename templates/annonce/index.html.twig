@@ -3,14 +3,21 @@
 {% block title %}Hello AnnonceController!{% endblock %}
 
 {% block body %}
-<html>
-<br>
-<div class="w3-container">
-    <p>Retrouverez ici les différentes annonces.</p>
+
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if app.user.roles[0] == "ROLE_RESP" %}
+<div class="w3-container w3-margin-top">
+    <h2 class="w3-center">Ajouter une nouvelle Annonce</h2>
 
     {{form(form)}}
 </div>
+{% else %}
 
+<p>Permission non accordé</p>
+{% endif %}
 
+{% else %}
 
-</html>{% endblock %}
+<p>Vous devez être connecter pour acceder a cette page</p>
+{% endif %}
+{% endblock %}
