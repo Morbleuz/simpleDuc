@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class EquipeType extends AbstractType
 {
@@ -24,6 +24,8 @@ class EquipeType extends AbstractType
                 'expanded' => true,
                 'choice_label' => 'email',
             ])
+            ->add('envoyer', SubmitType::class,['label'=> 'Envoyer', 'attr' => ['class'=> 'w3-button w3-black w3-section']])
+            
         ;
     }
 

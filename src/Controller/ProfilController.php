@@ -24,6 +24,7 @@ class ProfilController extends AbstractController
                 $em->flush();
             }
         }
+        
         return $this->render('profil/index.html.twig', [
             'form' => $form->createView()
         ]);

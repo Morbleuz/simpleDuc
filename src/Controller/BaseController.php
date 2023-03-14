@@ -17,7 +17,7 @@ class BaseController extends AbstractController
 
         $contact = new Contact();
         $form =  $this->createForm(ContactType::class,$contact);
-
+        
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if ($form->isSubmitted()&&$form->isValid()){
