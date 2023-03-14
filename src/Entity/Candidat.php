@@ -22,6 +22,10 @@ class Candidat
     #[ORM\Column(length: 150)]
     private ?string $email = null;
 
+    #[ORM\ManyToOne(inversedBy: 'candidats')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Annonce $annonce = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +63,18 @@ class Candidat
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAnnonce(): ?Annonce
+    {
+        return $this->annonce;
+    }
+
+    public function setAnnonce(?Annonce $annonce): self
+    {
+        $this->annonce = $annonce;
 
         return $this;
     }
