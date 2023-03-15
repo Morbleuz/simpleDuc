@@ -43,6 +43,8 @@ security:
     access_control:
         - { path: ^/responsablerh, roles: ROLE_RESP }
         - { path: ^/employe, roles: ROLE_EMP }
+        - { path: ^/dev, roles: ROLE_DEV }
+
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

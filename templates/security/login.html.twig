@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Backoffice{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -36,13 +36,14 @@
     </div>
     {% endif %}
 
-    <!--On vérifie que le user contient l'attribut annonce pour vérifier que c'est un employeRH-->
-    {% if app.user.taches is defined %}
+    <!--On vérifie que le user contient l'attribut annonce pour vérifier que c'est un Dev-->
+    {% if app.user.equipes is defined %}
     <div class="w3-container w3-center">
         <h2>Liste des fonctionnalités</h2>
         <p>Ici vous pourrez voir vos projets en cours, votre liste de taches</p>
-        <a href="{{path('app_ajout_employerh')}}" class="w3-button w3-black">Ajouter un nouveau projet</a>
-        <a href="{{path('app_ajout_developpeur')}}" class="w3-button w3-black">Ajouter des taches</a>
+        <a href="{{path('app_projet')}}" class="w3-button w3-black">Ajouter un nouveau projet</a>
+        <a href="{{path('app_equipe')}}" class="w3-button w3-black">Ajouter une equipe</a>
+
 
     </div>
     {% endif %}

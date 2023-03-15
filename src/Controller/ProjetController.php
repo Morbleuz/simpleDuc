@@ -11,12 +11,12 @@ use App\Entity\Projet;
 
 class ProjetController extends AbstractController
 {
-    #[Route('/projet', name: 'app_projet')]
+    #[Route('/dev-projet', name: 'app_projet')]
     public function index(): Response
     {
         $projet = new Projet();
         $form = $this->createForm(ProjetType::class, $projet);
-
+        $projet->setCoutReel(0);
         return $this->render('projet/index.html.twig', [
             'form' => $form->createView()
 
