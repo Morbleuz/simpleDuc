@@ -12,45 +12,57 @@
         <div class="col">
             <div class="container p-4 rounded border border-grey">
 
-                <h1 class="h3 w-100"><a href="">{{item.NomAnnonce}}</a></h1>
-
-                <span class="h6">créer par <a href="" class="text-blue">{{item.responsableRH.nom}}</a></span>
-                <div class="list-group mt-2">
-                    <a href="#" class="list-group-item list-group-item-action">Poste : {{item.PosteAPromouvoir}}</a>
-                    <a href="#" class="list-group-item list-group-item-action">Salaire de base : {{item.SalaireDeBase}} Euro / ans </a>
-                    <a href="#" class="list-group-item list-group-item-action">Qualification : {{item.Qualification}}</a>
-                    <a href="#" class="list-group-item list-group-item-action">Description du poste : {{item.Description}}</a>
-                </div>
-                <div class="container text-center">
-                    <button type="button" class="btn btn-dark mt-4" data-toggle="modal" data-target="#modal{{item.id}}">
-                        Postuler
-                    </button>
-                </div>
+                <h1 class="h3 w-100"><a href="">{{item.NomAnnonce}}</a></h1> <i <span class="h6">créer par <a href="" class="text-blue">{{item.responsableRH.nom}}</a></span>
+                    <div class="list-group mt-2">
+                        <a href="#" class="list-group-item list-group-item-action">Poste : {{item.PosteAPromouvoir}}</a>
+                        <a href="#" class="list-group-item list-group-item-action">Salaire de base : {{item.SalaireDeBase}} Euro / ans </a>
+                        <a href="#" class="list-group-item list-group-item-action">Qualification : {{item.Qualification}}</a>
+                        <a href="#" class="list-group-item list-group-item-action">Description du poste : {{item.Description}}</a>
+                    </div>
+                    <div class="container text-center">
+                        <button type="button" class="btn btn-dark mt-4" data-toggle="modal" data-target="#modal">
+                            Postuler
+                        </button>
+                    </div>
             </div>
         </div>
 
+
+        {% endfor %}
+
         <!-- Modal -->
-        <div class="modal fade" id="modal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Formulaire {{item.NomAnnonce}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Formulaire </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+
+                        {{ form_start(form) }}
+
+                        {{ form_row(form.email) }}
+
+                        {{ form_row(form.prenom) }}
+
+                        {{ form_row(form.nom) }}
+
+                        <input type="hidden" value="" id="annonceID" name="annonceID">
+
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button> {{ form_end(form) }}
                     </div>
                 </div>
             </div>
         </div>
-
-        {% endfor %}
+        <!-- Fin Modal -->
     </div>
 </div>
 {% endblock %}

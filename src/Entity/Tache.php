@@ -24,10 +24,11 @@ class Tache
     private ?bool $estFaite = null;
 
     #[ORM\ManyToOne(inversedBy: 'taches')]
-    private ?Developpeur $developpeur = null;
+    private ?Projet $projet = null;
 
     #[ORM\ManyToOne(inversedBy: 'taches')]
-    private ?Projet $projet = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Developpeur $developpeur = null;
 
     public function __construct()
     {
@@ -62,18 +63,6 @@ class Tache
         return $this;
     }
 
-    public function getDeveloppeur(): ?Developpeur
-    {
-        return $this->developpeur;
-    }
-
-    public function setDeveloppeur(?Developpeur $developpeur): self
-    {
-        $this->developpeur = $developpeur;
-
-        return $this;
-    }
-
     public function getProjet(): ?Projet
     {
         return $this->projet;
@@ -82,6 +71,18 @@ class Tache
     public function setProjet(?Projet $projet): self
     {
         $this->projet = $projet;
+
+        return $this;
+    }
+
+    public function getDeveloppeur(): ?Developpeur
+    {
+        return $this->developpeur;
+    }
+
+    public function setDeveloppeur(?Developpeur $developpeur): self
+    {
+        $this->developpeur = $developpeur;
 
         return $this;
     }

@@ -24,11 +24,11 @@ class Projet
     #[ORM\Column]
     private ?int $CoutReel = null;
 
-    #[ORM\OneToOne(inversedBy: 'projet', cascade: ['persist', 'remove'])]
-    private ?Equipe $equipe = null;
-
     #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Tache::class)]
     private Collection $taches;
+
+    #[ORM\ManyToOne(inversedBy: 'projet')]
+    private ?Equipe $equipe = null;
 
     public function __construct()
     {
@@ -76,18 +76,6 @@ class Projet
         return $this;
     }
 
-    public function getEquipe(): ?Equipe
-    {
-        return $this->equipe;
-    }
-
-    public function setEquipe(?Equipe $equipe): self
-    {
-        $this->equipe = $equipe;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Tache>
      */
@@ -114,6 +102,18 @@ class Projet
                 $tach->setProjet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEquipe(): ?Equipe
+    {
+        return $this->equipe;
+    }
+
+    public function setEquipe(?Equipe $equipe): self
+    {
+        $this->equipe = $equipe;
 
         return $this;
     }

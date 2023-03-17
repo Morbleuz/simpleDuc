@@ -7,9 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\CreateannonceType;
 use App\Entity\Annonce;
+use App\Entity\Candidat;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-
+use App\Form\PostuleAnnonceType;
 class AnnonceController extends AbstractController
 {
     #[Route('/responsablerh-annonce', name: 'app_annonce')]
@@ -50,12 +51,41 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/liste-annonce', name: 'app_liste-annonce')]
-    public function listeannonce(Request $request,EntityManagerInterface $entityManager): Response
+    public function listeannonce(Request $request,EntityManagerInterface $doctrine): Response
     {
-
-        $repoannonce = $entityManager->getRepository(Annonce::class);
+        $formCandidat = $this->createForm(PostuleAnnonceType::class);
+        $repoannonce = $doctrine->getRepository(Annonce::class);
         $listeannonce = $repoannonce->findAll();
+
+        
+
+        $candidat = new Candidat();
+
+        if($request->isMethod('POST')){
+            $formCandidat->handleRequest($request);
+            if ($formCandidat->isSubmitted()&&$formCandidat->isValid()){
+               
+                $email=$formCandidat->get('email')->getData();
+                $nom=$formCandidat->get('nom')->getData();
+                $prenom=$formCandidat->get('prenom')->getData();
+
+                $annonceID=$_POST["annonceID"];
+                $Annonce = $doctrine->getRepository(Annonce::class)->find($annonceID);
+                $candidat->setEmail($email);
+                $candidat->setNom($nom);
+                $candidat->setPrenom($prenom);
+                $candidat->setAnnonce($Annonce);
+
+                $doctrine->persist($candidat);
+                $doctrine->flush();   
+                                
+                $this->addFlash('notice','Votre candidature est envoyé');
+                return $this->redirectToRoute('app_liste-annonce');
+            }
+        }
+
         return $this->render('annonce/liste-annonce.html.twig', [
+            "form" => $formCandidat->createView(),
             "annonces" => $listeannonce
         ]);
     }

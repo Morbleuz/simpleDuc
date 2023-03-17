@@ -37,6 +37,32 @@ class DeveloppeurRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }   
+
+    ///Retourne la liste des projets d'un développeur
+    public function getProjet($idDeveloppeur)
+    {   
+
+        $q = $this->createQueryBuilder('d');
+        $q->leftJoin('d.equipes', 'equipes','WITH')
+        ->leftJoin('equipes.projet', 'projet','WITH')     
+    
+        ->andWhere('d.id = :id')
+        ->setParameter('id', $idDeveloppeur);
+        //->orderBy('a.id', 'ASC');
+        return $q->getQuery()->getResult();
+
+        /* return $this->createQueryBuilder('d')
+        ->leftJoin('d.equipes', 'equipes','WITH')
+        ->leftJoin('equipes.projet', 'projet','WITH')
+        ->setParameter('val', $idDeveloppeur)
+        ->groupBy('projet.id')
+        ->where(' equipes.developpeurs IN (:val) ')
+        ->select('projet.nomProjet')
+        ->getQuery()
+        ->getResult()
+        ;
+        */ 
     }
 
 //    /**

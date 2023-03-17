@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ContactType;
 use App\Entity\Contact;
+use App\Entity\Developpeur;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class BaseController extends AbstractController
@@ -37,7 +39,9 @@ class BaseController extends AbstractController
     #[Route('/mention_legale', name: 'mention')]
     public function mentionlegales(): Response
     { 
+        
         return $this->render('mentions_legales/mentionslegales.html.twig', [
+        
         ]);
     }
     
