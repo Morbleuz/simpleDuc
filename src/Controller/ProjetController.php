@@ -39,4 +39,14 @@ class ProjetController extends AbstractController
 
         ]);
     }
+
+        #[Route('/dev-projet/{id}', name: 'app_un_projet', requirements: ['id' => '\d+'])]
+        public function unprojet(Request $request, int $id): Response
+        {
+            $projet = $this->getDoctrine()->getRepository(Projet::class)->find($id);
+            return $this->render('projet/unprojet.html.twig', [
+                'projet' => $projet
+            ]);
+        }
 }
+
