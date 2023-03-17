@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Form\SecurityType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Developpeur;
+
 
 
 class SecurityController extends AbstractController
@@ -17,7 +19,8 @@ class SecurityController extends AbstractController
     {   
         $form = $this->createForm(SecurityType::class);
         $form->handleRequest($request);
-
+        //$projets = $this->getDoctrine()->getRepository(Developpeur::class)->getProjet($this->getUser());
+        //$projets = $this->getUser()->getEquipes();
         if ($form->isSubmitted() && $form->isValid()) {
         }
 

@@ -14,9 +14,13 @@ class Developpeur extends Employe
     #[ORM\ManyToMany(targetEntity: Equipe::class, inversedBy: 'developpeurs')]
     private Collection $equipes;
 
+    #[ORM\OneToMany(mappedBy: 'developpeur', targetEntity: Tache::class, orphanRemoval: true)]
+    private Collection $taches;
+
     public function __construct()
     {
         $this->equipes = new ArrayCollection();
+        $this->taches = new ArrayCollection();
     }
 
     /**
@@ -39,6 +43,36 @@ class Developpeur extends Employe
     public function removeEquipe(Equipe $equipe): self
     {
         $this->equipes->removeElement($equipe);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tache>
+     */
+    public function getTaches(): Collection
+    {
+        return $this->taches;
+    }
+
+    public function addTach(Tache $tach): self
+    {
+        if (!$this->taches->contains($tach)) {
+            $this->taches->add($tach);
+            $tach->setDeveloppeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTach(Tache $tach): self
+    {
+        if ($this->taches->removeElement($tach)) {
+            // set the owning side to null (unless already changed)
+            if ($tach->getDeveloppeur() === $this) {
+                $tach->setDeveloppeur(null);
+            }
+        }
 
         return $this;
     }

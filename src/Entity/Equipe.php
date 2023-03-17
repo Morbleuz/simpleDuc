@@ -18,15 +18,16 @@ class Equipe
     #[ORM\Column(length: 255)]
     private ?string $NomEquipe = null;
 
-    #[ORM\OneToOne(mappedBy: 'equipe', cascade: ['persist', 'remove'])]
-    private ?Projet $projet = null;
-
     #[ORM\ManyToMany(targetEntity: Developpeur::class, mappedBy: 'equipes')]
     private Collection $developpeurs;
+
+    #[ORM\OneToMany(mappedBy: 'equipe', targetEntity: Projet::class)]
+    private Collection $projet;
 
     public function __construct()
     {
         $this->developpeurs = new ArrayCollection();
+        $this->projet = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -42,28 +43,6 @@ class Equipe
     public function setNomEquipe(string $NomEquipe): self
     {
         $this->NomEquipe = $NomEquipe;
-
-        return $this;
-    }
-
-    public function getProjet(): ?Projet
-    {
-        return $this->projet;
-    }
-
-    public function setProjet(?Projet $projet): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($projet === null && $this->projet !== null) {
-            $this->projet->setEquipe(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($projet !== null && $projet->getEquipe() !== $this) {
-            $projet->setEquipe($this);
-        }
-
-        $this->projet = $projet;
 
         return $this;
     }
@@ -90,6 +69,36 @@ class Equipe
     {
         if ($this->developpeurs->removeElement($developpeur)) {
             $developpeur->removeEquipe($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjet(): Collection
+    {
+        return $this->projet;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projet->contains($projet)) {
+            $this->projet->add($projet);
+            $projet->setEquipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projet->removeElement($projet)) {
+            // set the owning side to null (unless already changed)
+            if ($projet->getEquipe() === $this) {
+                $projet->setEquipe(null);
+            }
         }
 
         return $this;
