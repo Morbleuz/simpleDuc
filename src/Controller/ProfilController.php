@@ -22,6 +22,7 @@ class ProfilController extends AbstractController
                 //$user->setEmail($form->get("email")->getData());
                 $em->persist($this->getUser());
                 $em->flush();
+                $this->addFlash('notice','Votre profil à été correctement mit à jour.');
             }
         }
         

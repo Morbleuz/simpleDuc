@@ -1,0 +1,10 @@
+api_platform:
+    title: 'SimpleDuc API'
+    description: 'Bienvenue sur API de SimpleDuc'
+    version: '0.0.1'
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
