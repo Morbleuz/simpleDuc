@@ -5,27 +5,28 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\EmployeModifType;
+use App\Form\EquipeType;
+use App\Entity\Equipe;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class ProfilController extends AbstractController
+class EquipeController extends AbstractController
 {
-    #[Route('/profil', name: 'app_profil')]
+    #[Route('/equipe', name: 'app_equipe')]
     public function index(Request $request): Response
     {
-        $form = $this->createForm(EmployeModifType::class, $this->getUser());
+        $equipe = new Equipe();
+        $form = $this->createForm(EquipeType::class, $equipe);
+
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if ($form->isSubmitted()&&$form->isValid()){
                 $em = $this->getDoctrine()->getManager();
-                //$user->setEmail($form->get("email")->getData());
-                $em->persist($this->getUser());
+                $em->persist($equipe);
                 $em->flush();
             }
         }
-        
-        return $this->render('profil/index.html.twig', [
+        return $this->render('equipe/index.html.twig', [
             'form' => $form->createView()
         ]);
     }

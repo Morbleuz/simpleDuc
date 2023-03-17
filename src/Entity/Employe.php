@@ -9,10 +9,6 @@ use App\Entity\User;
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
 class Employe extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
     #[ORM\Column(length: 27, nullable: true)]
     private ?string $RIB = null;
@@ -25,11 +21,6 @@ class Employe extends User
 
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $Sexe = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getRIB(): ?string
     {

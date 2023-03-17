@@ -26,17 +26,26 @@
                 {% endif %}
             </td>
             <td>{% if employe.nombreheures is null %}
-                <input type="number" value="0">
+                <span>
+                    <button class="w3-btn w3-red">-</button>
+                    <button class="w3-btn">00</button>
+                    <button class=" w3-btn w3-green">+</button>
+                </span>
                 {% else %}
-                <input type="number" value="{{employe.nombreheures}}">
-
+                <span>
+                    <button class="w3-btn w3-red">-</button>
+                    <button class="w3-btn"> {{employe.nombreheures}}</button>
+                    <button class=" w3-btn w3-green">+</button>
+                </span>
                 {% endif %}
             </td>
-            <td><a href="">Delete</a></td>
+
+            <td><a href="{{path('app_delete_employe',{id: employe.id})}}"><i class="fa fa-trash"></i></a></td>
         </tr>
         {% endfor %}
 
     </table>
+
 
 </div>
 {% endblock %}

@@ -35,9 +35,13 @@ class Annonce
     #[ORM\JoinColumn(nullable: false)]
     private ?ResponsableRH $responsableRH = null;
 
+    #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: Candidat::class)]
+    private Collection $candidats;
+
 
     public function __construct()
     {
+        $this->candidats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +117,36 @@ class Annonce
     public function setResponsableRH(?ResponsableRH $responsableRH): self
     {
         $this->responsableRH = $responsableRH;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidat>
+     */
+    public function getCandidats(): Collection
+    {
+        return $this->candidats;
+    }
+
+    public function addCandidat(Candidat $candidat): self
+    {
+        if (!$this->candidats->contains($candidat)) {
+            $this->candidats->add($candidat);
+            $candidat->setAnnonce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidat(Candidat $candidat): self
+    {
+        if ($this->candidats->removeElement($candidat)) {
+            // set the owning side to null (unless already changed)
+            if ($candidat->getAnnonce() === $this) {
+                $candidat->setAnnonce(null);
+            }
+        }
 
         return $this;
     }
