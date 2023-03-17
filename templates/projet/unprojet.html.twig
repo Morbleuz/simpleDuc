@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Projet {{projet.nomProjet}}
+{% endblock %}
+{% block body %}
+<div class="w3-center">
+    <h1>Projet <strong>{{projet.nomProjet}}</strong></h1>
+    <h2>Liste des tâches</h2>
+    <ul>
+        {% if projet.taches|length == 0 %}
+        Le projet ne contient pas de tâche
+        {% endif %}
+        {% for t in projet.taches %}
+        <li>{{t.nomTache}} <input type="checkbox" {% if t.estFaite == true %}checked{% endif %}></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Ajouter des tâches</h2>
+    <input type="text" name="tache" id="tache"><input type="button" value="Ajouter">
+</div>
+{{ encore_entry_link_tags('projet') }}
+{% endblock %}
