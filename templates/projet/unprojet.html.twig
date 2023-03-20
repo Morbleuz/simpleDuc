@@ -11,12 +11,12 @@ Projet {{projet.nomProjet}}
         Le projet ne contient pas de tâche
         {% endif %}
         {% for t in projet.taches %}
-        <li>{{t.nomTache}} <input type="checkbox" {% if t.estFaite == true %}checked{% endif %}></li>
+        <li>{{t.nomTache}} <input type="checkbox" {% if t.estFaite == true %}checked{% endif %} data-done="{{t.estfaite}}" data-id="{{t.id}}"></li>
         {% endfor %}
     </ul>
 
-    <h2>Ajouter des tâches</h2>
-    <input type="text" name="tache" id="tache"><input type="button" value="Ajouter">
+    <h2>Ajouter des tâches</h2> <input type=" text" name="tache" id="tache" placeholder="Nouvelle tâche"><input type="button" value="Ajouter">
 </div>
 {{ encore_entry_link_tags('projet') }}
+{{ encore_entry_script_tags('projetjs') }}
 {% endblock %}

@@ -9,20 +9,10 @@
     {% endif %}
 
     {% if app.user %}
-    <div>
-        <a href="{{path('app_forgot_password_request')}}">reset password</a>
-    </div>
+
     <div class="w3-container w3-center">
         <h1>Bienvenue <strong>{{app.user.prenom}}</strong> dans votre backoffice !</h1>
     </div>
-    <div class="mb-3">
-        Vous êtes connecté avec l'email {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">déconnexion</a>
-    </div>
-    <!--Si l'utilisateur est connecté alors on vérifie son Type-->
-    {% if app.user.rib is defined %}
-    Vous êtes connecté en tant qu'employé
-    {% endif %}
-
     <!--On vérifie que le user contient l'attribut annonce pour vérifier que c'est un employeRH-->
     {% if app.user.annonces is defined %}
     <div class="w3-container w3-center">

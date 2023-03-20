@@ -19,10 +19,10 @@
             <a href="{{path('app_base')}}" class="w3-bar-item w3-button"><b>S</b>imple<b>D</b>uc</a>
             <!-- Float links to the right. Hide them on small screens -->
             <div class="w3-right w3-hide-small">
-                <a href="#projects" class="w3-bar-item w3-button">Nos projets</a>
-                <a href="#about" class="w3-bar-item w3-button">À propos</a>
+                <a href="{{path('app_base')}}#projects" class="w3-bar-item w3-button">Nos projets</a>
+                <a href="{{path('app_base')}}#about" class="w3-bar-item w3-button">À propos</a>
                 <a href="{{path('mention')}}" class="w3-bar-item w3-button">Mentions légales</a>
-                <a href="#contact" class="w3-bar-item w3-button">Contactez-nous</a>
+                <a href="{{path('app_base')}}#contact" class="w3-bar-item w3-button">Contactez-nous</a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="{{path('app_login')}}" class="w3-bar-item w3-button"><i class="fa fa-folder"></i></a>
                 <a href="{{path('app_profil')}}" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>

@@ -44,6 +44,9 @@ class ProjetController extends AbstractController
         public function unprojet(Request $request, int $id): Response
         {
             $projet = $this->getDoctrine()->getRepository(Projet::class)->find($id);
+            if($projet == null){
+                return $this->redirectToRoute('app_login');
+            }
             return $this->render('projet/unprojet.html.twig', [
                 'projet' => $projet
             ]);
