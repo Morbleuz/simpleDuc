@@ -70,6 +70,7 @@ class AnnonceController extends AbstractController
                 $prenom=$formCandidat->get('prenom')->getData();
 
                 $annonceID=$_POST["annonceID"];
+                
                 $Annonce = $doctrine->getRepository(Annonce::class)->find($annonceID);
                 $candidat->setEmail($email);
                 $candidat->setNom($nom);
