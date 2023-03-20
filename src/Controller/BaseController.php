@@ -45,7 +45,9 @@ class BaseController extends AbstractController
     #[Route('/mention_legale', name: 'mention')]
     public function mentionlegales(): Response
     { 
+        
         return $this->render('mentions_legales/mentionslegales.html.twig', [
+        
         ]);
     }
     

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Listes des annonces{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock %}
+{% block body %}
+
+
+{% for item in annonces %}
+<div class="container mt-4">
+    <div class="row align-item-start">
+        <div class="col">
+            <div class="container p-4 rounded border border-grey">
+                <h1 class="h3 w-100"><a href="">{{item.NomAnnonce}}</a></h1> <i <span class="h6">créer par <a href="" class="text-blue">{{item.responsableRH.nom}}</a></span>
+                    <div class="list-group mt-2">
+                        <a href="#" class="list-group-item list-group-item-action">Poste : {{item.PosteAPromouvoir}}</a>
+                        <a href="#" class="list-group-item list-group-item-action">Salaire de base : {{item.SalaireDeBase}} Euro / ans </a>
+                        <a href="#" class="list-group-item list-group-item-action">Qualification : {{item.Qualification}}</a>
+                        <a href="#" class="list-group-item list-group-item-action">Description du poste : {{item.Description}}</a>
+                    </div>
+                    <div class="container text-center">
+                        <button type="button" class="btn btn-dark mt-4 btnP" data-toggle="modal" data-target="#modal{{item.id}}" data-id="{{item.id}}">
+                            Postuler
+                        </button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Formulaire </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                {{ form_start(form) }}
+
+                {{ form_row(form.email) }}
+
+                {{ form_row(form.prenom) }}
+
+                {{ form_row(form.nom) }}
+
+                <input type="hidden" value="" id="annonceID" name="annonceID">
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button> {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin Modal -->
+
+
+<script>
+    let ListebtnP = document.getElementsByClassName("btnP");
+    let modal = document.getElementsByClassName("modal");
+    let inputHiddenFormulaireCandidat = document.getElementById("annonceID");
+    for (const btnP of ListebtnP) {
+        btnP.addEventListener("click", LinkModalToForm, false)
+    }
+
+
+    function LinkModalToForm() {
+        let idAnnonce = this.getAttribute("data-id");
+
+        modal[0].setAttribute("id", "modal" + idAnnonce)
+        inputHiddenFormulaireCandidat.value = idAnnonce;
+        console.log(idAnnonce);
+        console.log(modal[0]);
+    }
+</script>
+
+{% endblock %}

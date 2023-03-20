@@ -55,6 +55,7 @@ class EmployesFixtures extends Fixture
                 $resp->getPassword()
             )
         );
+        $this->addReference('responsable', $resp);
         $manager->persist($resp);
 
         $Employe = new Employe();
