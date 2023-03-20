@@ -26,6 +26,8 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('projetjs', './assets/projet.js')
+    .addEntry('connexionjs', './assets/connexion.js')
+
 
 
     .addStyleEntry('projet', './assets/styles/projet.css')

@@ -23,7 +23,12 @@ class SecurityController extends AbstractController
         //$projets = $this->getUser()->getEquipes();
         if ($form->isSubmitted() && $form->isValid()) {
         }
-
+        $user =$this->getUser();
+        $projets = null;
+        if($user instanceof Developpeur){
+            $projets = $this->getDoctrine()->getRepository(Developpeur::class)->getProjet($user->getId());
+        }
+        dump($projets);
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user

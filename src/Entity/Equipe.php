@@ -6,7 +6,11 @@ use App\Repository\EquipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use ApiPlatform\Core\Annotation\ApiResource;
 
+
+#[ApiResource()]
 #[ORM\Entity(repositoryClass: EquipeRepository::class)]
 class Equipe
 {
@@ -19,6 +23,7 @@ class Equipe
     private ?string $NomEquipe = null;
 
     #[ORM\ManyToMany(targetEntity: Developpeur::class, mappedBy: 'equipes')]
+    #[MaxDepth(1)]
     private Collection $developpeurs;
 
     #[ORM\OneToMany(mappedBy: 'equipe', targetEntity: Projet::class)]

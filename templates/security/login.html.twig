@@ -55,7 +55,7 @@
             <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter.</h1>
             <input type="email" placeholder="Email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control w3-input w3-border" autocomplete="email" required autofocus><br>
             <input type="password" placeholder="Mot de passe" name="password" id="inputPassword" class="form-control w3-input w3-border" autocomplete="current-password" required><br>
-            <button class="w3-button w3-black w3-section" type="submit">
+            <button class="w3-button w3-black w3-section" type="submit" id='connexion'>
                 Connexion
             </button>
             <a href="{{path('app_forgot_password_request')}}" class="w3-button w3-black">Mot de passe oublié ?</a>
@@ -82,4 +82,8 @@
 
 
 </form>
+{% endblock %}
+{% block script %}
+{{ encore_entry_script_tags('connexionjs') }}
+
 {% endblock %}

@@ -4,14 +4,14 @@ Projet {{projet.nomProjet}}
 {% endblock %}
 {% block body %}
 <div class="w3-center">
-    <h1>Projet <strong>{{projet.nomProjet}}</strong></h1>
+    <h1>Projet <strong id="nomProjet" data-id="{{projet.id}}">{{projet.nomProjet}}</strong></h1>
     <h2>Liste des tâches</h2>
     <ul>
         {% if projet.taches|length == 0 %}
         Le projet ne contient pas de tâche
         {% endif %}
         {% for t in projet.taches %}
-        <li>{{t.nomTache}} <input type="checkbox" {% if t.estFaite == true %}checked{% endif %} data-done="{{t.estfaite}}" data-id="{{t.id}}"></li>
+        <li>{{t.nomTache}} <input type="checkbox" {% if t.estFaite == true %}checked{% endif %} data-done="{{t.estfaite}}" data-id="{{t.id}}"> <a href="">delete</a></li>
         {% endfor %}
     </ul>
 

@@ -7,13 +7,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
-#[ApiResource()]
+#[ApiResource(
+    itemOperations: ["get"=>["security"=>"is_granted('ROLE_ADMIN') or object == user"],] 
+)]
 #[ORM\Entity(repositoryClass: DeveloppeurRepository::class)]
 class Developpeur extends Employe
 {
 
     #[ORM\ManyToMany(targetEntity: Equipe::class, inversedBy: 'developpeurs')]
+    #[MaxDepth(1)]
     private Collection $equipes;
 
     #[ORM\OneToMany(mappedBy: 'developpeur', targetEntity: Tache::class, orphanRemoval: true)]
