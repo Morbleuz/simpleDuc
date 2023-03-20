@@ -14,6 +14,9 @@
     <h1>Vous êtes un user</h1>
     {% endif %}
     <h2>Bienvenue {{app.user.nom |upper}} {{app.user.prenom}} !</h3>
+        <div>
+            <a href="{{path('app_forgot_password_request')}}">Rénitialiser votre mot de passe</a>
+        </div>
         <p>Vous pouvez modifer ici vôtre RIB,...</p>
         {{form(form)}}
 

@@ -8,11 +8,15 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
+    //.setOutputPath('public/build/')
     // public path used by the web server to access the output path
-    .setPublicPath('/build')
+    //.setPublicPath('/build')
     // only needed for CDN's or subdirectory deploy
-    //.setManifestKeyPrefix('build/')
+    .setManifestKeyPrefix('build/')
+
+    .setOutputPath('public/build/')
+    // Indiquez ici l'URL publique du répertoire de sortie
+    .setPublicPath('https://s3-4440.nuage-peda.fr/simpleDuc/public/build')
 
     /*
      * ENTRY CONFIG
@@ -21,7 +25,13 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+<<<<<<< HEAD
     .addEntry('annonce', './assets/annonce.js')
+=======
+    .addEntry('projetjs', './assets/projet.js')
+
+
+>>>>>>> 2d42eb7542416faeba2ff246aea334a600d4a4fd
     .addStyleEntry('projet', './assets/styles/projet.css')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
