@@ -19,8 +19,8 @@ class Projet
     #[Groups(["read"])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
     #[Groups(["read"])]
+    #[ORM\Column]
     private ?string $nomProjet = null;
 
     #[ORM\Column]

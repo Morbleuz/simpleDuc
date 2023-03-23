@@ -31,8 +31,7 @@ class EquipeController extends AbstractController
                 $em->persist($equipe);
                 $em->flush();
                 $this->addFlash('notice', 'Equipe crée');
-                $this->redirectToRoute('app_login');
-
+                return $this->redirectToRoute('app_login');
             }
         }
 

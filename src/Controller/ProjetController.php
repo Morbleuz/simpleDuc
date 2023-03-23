@@ -27,10 +27,8 @@ class ProjetController extends AbstractController
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($projet);
                 $em->flush();
-
                 $this->addFlash('notice', 'Projet créer');
-                $this->redirectToRoute('app_login');
-
+                return $this->redirectToRoute('app_login');
             }
         }
         return $this->render('projet/index.html.twig', [

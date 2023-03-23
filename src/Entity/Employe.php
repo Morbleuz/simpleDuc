@@ -19,7 +19,7 @@ class Employe extends User
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Adresse = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $Sexe = null;
 
     public function getRIB(): ?string
