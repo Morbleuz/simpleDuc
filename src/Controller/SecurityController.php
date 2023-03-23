@@ -9,6 +9,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Form\SecurityType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Developpeur;
+use App\Entity\Projet;
+
 use Doctrine\ORM\EntityManagerInterface;
 
 class SecurityController extends AbstractController
@@ -27,9 +29,8 @@ class SecurityController extends AbstractController
         $user =$this->getUser();
         $projets = null;
         if($user instanceof Developpeur){
-            $projets = $this->getDoctrine()->getRepository(Developpeur::class)->getProjet($user->getId());
+            $projets = $this->getDoctrine()->getRepository(Projet::class)->findByDev($user->getId());
         }
-        dump($projets);
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -38,7 +39,8 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
-            'loginForm' => $form->createView()
+            'loginForm' => $form->createView(),
+            'projets' => $projets
         ]);
 
         

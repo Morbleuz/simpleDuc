@@ -7,30 +7,36 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-
-#[ApiResource()]
+#[ApiResource(normalizationContext:['groups' => ['read']])]
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["read"])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(["read"])]
     private ?string $nomProjet = null;
 
     #[ORM\Column]
+    #[Groups(["read"])]
     private ?int $CoutTotalEstime = null;
 
     #[ORM\Column]
+    #[Groups(["read"])]
     private ?int $CoutReel = null;
 
     #[ORM\OneToMany(mappedBy: 'projet', targetEntity: Tache::class)]
+    #[Groups(["read"])]
     private Collection $taches;
 
     #[ORM\ManyToOne(inversedBy: 'projet')]
+    #[Groups(["read"])]
     private ?Equipe $equipe = null;
 
     public function __construct()

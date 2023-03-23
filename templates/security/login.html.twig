@@ -22,10 +22,8 @@
         <a href="{{path('app_ajout_developpeur')}}" class="w3-button w3-black">Ajouter un développeur</a>
         <!--Redéfinir le path lorsque la partie annonce sera fini-->
         <a href="{{path('app_annonce')}}" class="w3-button w3-black">Ajouter une annonce</a>
-<<<<<<< HEAD
         <a href="{{path('app_ajout_employerh')}}" class="w3-button w3-black">Ajouter un nouveau projet</a>
         <a href="{{path('app_ajout_developpeur')}}" class="w3-button w3-black">Ajouter des taches</a>
-=======
         <a href="{{path('app_show_employe')}}" class="w3-button w3-black">Liste des employés</a>
     </div>
     {% endif %}
@@ -37,12 +35,11 @@
         <p>Ici vous pourrez voir vos projets en cours, votre liste de taches</p>
         <a href="{{path('app_projet')}}" class="w3-button w3-black">Ajouter un nouveau projet</a>
         <a href="{{path('app_equipe')}}" class="w3-button w3-black">Ajouter une equipe</a>
-<<<<<<< HEAD
-
->>>>>>> 3becc3434657bc34d00cee41947eaa8c681d5d4d
-=======
         <h2>Liste de vos projets en cours</h2>
->>>>>>> 89982745260e523077fd0d8e7fbd529783bfc7ac
+        <p>Vous pouvez visualiser le nombres de taches restantes juste à côté du projet</p>
+        {% for p in projets %}
+        <a href="{{path('app_un_projet', { id:p.id }) }}" class="w3-button w3-grey">{{p.nomProjet}} <span class="w3-badge w3-red">{{p.taches|filter(t => t.estFaite == false)|length}}</span><span class="w3-badge w3-green">{{p.taches|filter(t => t.estFaite == true)|length}}</span></a>
+        {% endfor %}
 
     </div>
     {% endif %}
@@ -50,12 +47,12 @@
     {% else %}
     <!-- <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-    -->
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                <button class="btn btn-lg btn-primary" type="submit">
+                    Sign in
+                </button>
+                -->
 
     <div class="w3-container w3-center" style="margin-left: auto; margin-right: auto; margin-top:0px; width: 70%; height: 800px; background: url({{ asset('images/stockOffice.jpg') }}) no-repeat 0 100%; background-size: cover;">
         <div class="w3-container w3-center" style="width:30%; height: 575px; border: 1px black solid;position: absolute; margin: auto; top:0; bottom: 0; left: 0; right: 0; background-color: rgba(255, 255, 255, .9)">

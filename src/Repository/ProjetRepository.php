@@ -39,6 +39,17 @@ class ProjetRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByDev(int $idDev)
+    {
+        $q = $this->createQueryBuilder('p');
+        $q->leftJoin('p.equipe', 'equipe','WITH')
+        ->leftJoin('equipe.developpeurs', 'developpeurs','WITH')     
+        ->andWhere('developpeurs.id = :id')
+        ->setParameter('id', $idDev)
+        ->groupBy('p');
+        //->orderBy('a.id', 'ASC');
+        return $q->getQuery()->getResult();
+    }
 //    /**
 //     * @return Projet[] Returns an array of Projet objects
 //     */

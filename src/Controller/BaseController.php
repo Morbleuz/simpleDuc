@@ -35,6 +35,7 @@ class BaseController extends AbstractController
                 return $this->redirectToRoute('app_base');
             }
         }
+        
         return $this->render('base/index.html.twig', [
             'form' => $form->createView(),
             'projets' => $projets,
