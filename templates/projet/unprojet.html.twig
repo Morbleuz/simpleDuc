@@ -4,19 +4,53 @@ Projet {{projet.nomProjet}}
 {% endblock %}
 {% block body %}
 <div class="w3-center">
-    <h1>Projet <strong>{{projet.nomProjet}}</strong></h1>
-    <h2>Liste des tâches</h2>
-    <ul>
+    <h1>Projet <strong id="nomProjet" data-id-user="{{app.user.id}}" data-id="{{projet.id}}">{{projet.nomProjet}}</strong></h1>
+    <h2>Ajouter des tâches</h2>
+    <input type="text" name="tache" id="tache" placeholder="Nouvelle tâche"><input type="button" value="Ajouter" class="w3-button w3-black  w3-margin">
+    <div class="w3-container">
+
+    </div>
+    <!--
+    <ul id="listeTache">
         {% if projet.taches|length == 0 %}
         Le projet ne contient pas de tâche
         {% endif %}
         {% for t in projet.taches %}
-        <li>{{t.nomTache}} <input type="checkbox" {% if t.estFaite == true %}checked{% endif %} data-done="{{t.estfaite}}" data-id="{{t.id}}"></li>
+        <li>{{t.nomTache}} <input type="checkbox" {% if t.estFaite == true %}checked{% endif %} data-done="{{t.estfaite}}" data-id="{{t.id}}"> <a href="">delete</a></li>
         {% endfor %}
     </ul>
+    -->
+    <p>Vous pouvez retrouver ici la liste des taches du projet, cliquez sur l'une d'entres elles pour changer son état.</p>
+    <div class="w3-row">
+        <div class="w3-col m6 l6 left todo">
+            <h1 class="title">À faire ⏱️</h1>
+            <div class="content left" id="left">
+                {% for t in projet.taches|filter(v => v.estFaite == false) %}
 
-    <h2>Ajouter des tâches</h2> <input type=" text" name="tache" id="tache" placeholder="Nouvelle tâche"><input type="button" value="Ajouter">
+                <div class="tache">
+                    <p class="item" data-nomTache="{{t.nomTache}}" data-done={% if t.estfaite == true %}"true"{% else %} "false" {% endif %} data-id="{{t.id}}">{{t.nomTache}} </p>
+                    <i class="fa fa-trash" data-id="{{t.id}}"></i>
+                </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+        <div class="w3-col m6 l6  rigth do">
+            <h1 class="title">Faites ✅</h1>
+            <div class="content rigth" id="rigth">
+                {% for t in projet.taches|filter(v => v.estFaite == true) %}
+                <div class="tache">
+                    <p class="item" data-nomTache="{{t.nomTache}}" data-done={% if t.estfaite == true %}"true"{% else %} "false" {% endif %} data-id="{{t.id}}">{{t.nomTache}} </p>
+                    <i class="fa fa-trash" data-id="{{t.id}}"></i>
+                </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
 </div>
-{{ encore_entry_link_tags('projet') }}
 {{ encore_entry_script_tags('projetjs') }}
+{{ encore_entry_link_tags('projet') }}
 {% endblock %}

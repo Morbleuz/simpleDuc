@@ -1,3 +1,71 @@
-body {}
+.left .tache {
+    background-color: #ddd;
+    margin: 10px;
+    padding: 2px;
+}
 
-div {}
+.rigth .tache {
+    background-color: #b8b8b8;
+    margin: 10px;
+    padding: 2px;
+
+}
+
+.item {
+    width: 100%;
+    margin: 0;
+    padding: 10px
+}
+
+.title {
+    border-bottom: 1px solid black;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.fa-trash {
+    font-size: 30px;
+    color: black;
+}
+
+i:hover {
+    cursor: pointer;
+    -ms-transform: scale(1.01);
+    /* IE 9 */
+    -webkit-transform: scale(1.01);
+    /* Safari 3-8 */
+    transform: scale(1.01);
+}
+
+.tache {
+    border: 1px solid black;
+    margin: 1em;
+    box-shadow: 0.9px 0.5px 0.5px black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left .tache:hover {
+    cursor: pointer;
+
+    -ms-transform: scale(1.01);
+    /* IE 9 */
+    -webkit-transform: scale(1.01);
+    /* Safari 3-8 */
+    transform: scale(1.01);
+}
+
+.rigth .tache:hover {
+    cursor: pointer;
+    -ms-transform: scale(1.01);
+    /* IE 9 */
+    -webkit-transform: scale(1.01);
+    /* Safari 3-8 */
+    transform: scale(1.01);
+}
+
+.content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}

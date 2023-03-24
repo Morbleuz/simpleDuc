@@ -46,23 +46,12 @@ class DeveloppeurRepository extends ServiceEntityRepository
         $q = $this->createQueryBuilder('d');
         $q->leftJoin('d.equipes', 'equipes','WITH')
         ->leftJoin('equipes.projet', 'projet','WITH')     
-    
         ->andWhere('d.id = :id')
-        ->setParameter('id', $idDeveloppeur);
+        ->setParameter('id', $idDeveloppeur)
+        ->groupBy('projet');
         //->orderBy('a.id', 'ASC');
         return $q->getQuery()->getResult();
 
-        /* return $this->createQueryBuilder('d')
-        ->leftJoin('d.equipes', 'equipes','WITH')
-        ->leftJoin('equipes.projet', 'projet','WITH')
-        ->setParameter('val', $idDeveloppeur)
-        ->groupBy('projet.id')
-        ->where(' equipes.developpeurs IN (:val) ')
-        ->select('projet.nomProjet')
-        ->getQuery()
-        ->getResult()
-        ;
-        */ 
     }
 
 //    /**

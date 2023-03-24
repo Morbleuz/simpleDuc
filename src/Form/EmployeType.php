@@ -25,7 +25,9 @@ class EmployeType extends AbstractType
             'choices'  => [
                 'Homme' => 'Homme',
                 'Femme' => 'Femme',
-            ]])
+                'Femme' => 'Non binaire',
+              ]
+            ])
             ->add('Envoyer', SubmitType::class)
         ;
     }

@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 class EmployeModifType extends AbstractType
@@ -14,10 +17,16 @@ class EmployeModifType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('Nom')
-            ->add('Prenom')
-            ->add('Sexe')
+        ->add('email', EmailType::class )
+        ->add('Nom',TextType::class)
+        ->add('Prenom',TextType::class)
+        ->add('Sexe',ChoiceType::class, [
+            'choices'  => [
+                'Homme' => 'Homme',
+                'Femme' => 'Femme',
+                'Non binaire' => 'Non binaire',
+              ]
+            ])
             ->add('Envoyer', SubmitType::class)
 
         ;

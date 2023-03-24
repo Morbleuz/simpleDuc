@@ -38,6 +38,23 @@ class EmployesFixtures extends Fixture
             )
         );
         $manager->persist($developpeur);
+        $developpeur = new Developpeur();
+        $developpeur->setEmail("developpeur2@simpleduc.fr");
+        $developpeur->setPassword("motdepasse");
+        $developpeur->setRoles(array("ROLE_DEV"));
+        $developpeur->setNom("Martin");
+        $developpeur->setPrenom("Tom");
+        $developpeur->setRIB("FR1O32O2OI32OI");
+        $developpeur->setNombreHeures(36);
+        $developpeur->setAdresse("4 rue de guymo");
+        $developpeur->setSexe("Homme");
+        $developpeur->setPassword(
+            $this->passwordHasher->hashPassword(
+                $developpeur,
+                $developpeur->getPassword()
+            )
+        );
+        $manager->persist($developpeur);
 
         $resp = new ResponsableRH();
         $resp->setEmail("responsable@simpleduc.fr");

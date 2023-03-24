@@ -21,7 +21,7 @@ class Employe extends User
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Adresse = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $Sexe = null;
 
     #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Email::class, orphanRemoval: true)]
