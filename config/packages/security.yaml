@@ -44,7 +44,7 @@ security:
         - { path: ^/responsablerh, roles: ROLE_RESP }
         - { path: ^/employe, roles: ROLE_EMP }
         - { path: ^/dev, roles: ROLE_DEV }
-
+        - { path: ^/messagerie, roles: ROLE_EMP }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

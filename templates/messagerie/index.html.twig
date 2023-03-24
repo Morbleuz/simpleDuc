@@ -1,0 +1,206 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessagerieController!{% endblock %}
+{% block stylesheet %}
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">{% endblock %}
+{% block body %}
+<div class="container w-25  mt-4">
+
+    <div class="card bg-dark text-white">
+        <div class="card-body">
+            <h5 class="card-title">Information Messagerie</h5>
+            <p class="card-text">Il y a un total de {{nombreEmailEnvoyer[0].nbrEmailEnvoyer}} mails et {{nombreReponseEnvoyer[0].nbrReponseEnvoyer}} réponse/s envoyer</p>
+
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <ul class="nav nav-pills d-flex align-items-start" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" data-bs-toggle="tab" href="#home" aria-selected="true" role="tab">Boite de Reception</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#sendemail" aria-selected="false" role="tab" tabindex="-1">Envoyer un email</a>
+        </li>
+    </ul>
+
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active show" id="home" role="tabpanel">
+            <div class="container-fluid w-auto h-auto m-5">
+                <div class="row">
+                    <div class="col">
+                        <div class="container m-4">
+                            <ul class="nav nav-pills flex-column  text-center" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="messagerecu" style="cursor:pointer;">Message Reçus[{{ app.user.receiveEmail.count}}]</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link mt-1" id="messageenvoyer" style="cursor:pointer;">Message Envoyer[{{ app.user.sendEmail.count}}]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col" id="ReceiverReception">
+                        <table class="table">
+                            <thead>
+
+                                <th>Expéditeur</th>
+                                <th>Objet</th>
+                                <th>Message</th>
+                                <th>Nombre de réponse/s</th>
+                                <th></th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                {% for item in app.user.receiveEmail %}
+                                <tr>
+                                    <th scope="row">{{item.sender.email}}</th>
+                                    <td>{{item.objet}}</td>
+                                    <td>{{item.message | slice(0, 150)}} [...]</td>
+                                    <td>il y a {{item.reponses.count}} réponse/s</td>
+                                    <td><a href="{{ path('app_messagerieparid', {"id": item.id})}}" class="btn btn-success">Répondre</a></td>
+                                    <td><a href="{{ path('app_removeEmail', {"id": item.id})}}" class="btn btn-danger">Supprimer</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col" id="senderReception">
+                        <table class="table">
+
+                            <thead>
+                                <th>Destinataire</th>
+                                <th>Objet</th>
+                                <th>Message</th>
+                                <th>Nombre de réponse/s</th>
+                                <th></th>
+                                <th></th>
+                            </thead>
+                            <tbody>
+                                {% for item in app.user.sendEmail %}
+                                <tr>
+                                    <th scope="row">{{item.receiver.email}}</th>
+                                    <td>{{item.objet}}</td>
+                                    <td>{{item.message | slice(0, 150)}} [...]</td>
+                                    <td>il y a {{item.reponses.count}} réponse/s</td>
+                                    <td><a href="{{ path('app_messagerieparid', {"id": item.id})}}" class="btn btn-success">Répondre</a></td>
+                                    <td><a href="{{ path('app_removeEmail', {"id": item.id})}}" class="btn btn-danger">Supprimer</a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="tab-pane fade" id="sendemail" role="tabpanel">
+            <div class="row mt-4">
+                <div class="col">
+                    <p class="text-warning h3">Cliquez sur l'utilisateur souhaité pour envoyer un email</p>
+                    <ul class="list-group list-group-flush">
+                        {% for employer in listeemployers %}
+                        {% if app.user.email == employer.email %}
+                        {% else %}
+                        <li class="list-group-item" data-id="{{employer.id}}">{{employer.email}}</li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class=" col">
+
+                    <div class="container pl-4" id="formSend">
+                        {{ form_start(form) }}
+
+                        {{ form_row(form.objet) }}
+
+                        {{ form_row(form.message) }}
+
+
+                        <input type="hidden" value="" id="ReceiverID" name="ReceiverID">
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-dark" id="sendEmail">Envoyer</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+<script>
+    let sendEmailBtn = document.getElementById("sendEmail");
+    let listeEmployer = document.getElementsByClassName("list-group");
+    let formSend = document.getElementById("formSend");
+    let inputReceiverID = document.getElementById("ReceiverID");
+    let ReceiverReception = document.getElementById("ReceiverReception");
+    let SenderReception = document.getElementById("senderReception");
+    let messagerecuBtn = document.getElementById("messagerecu");
+    let messageEnvoyerBtn = document.getElementById("messageenvoyer");
+    formSend.style.display = "none";
+    let idEmployerReceiver = 0;
+    let caseS = null;
+    SenderReception.style.display = "none";
+    messagerecuBtn.addEventListener("click", AfficherReceiverRecept, false);
+    messageEnvoyerBtn.addEventListener("click", AfficherSenderRecept, false);
+
+
+    for (const employer of listeEmployer[0].children) {
+        employer.addEventListener("click", selectEmployer, false);
+    }
+    sendEmailBtn.addEventListener("click", sendEmail, false)
+
+    function sendEmail() {
+        inputReceiverID.value = idEmployerReceiver;
+    }
+
+    function AfficherSenderRecept() {
+        SenderReception.style.display = "block";
+        ReceiverReception.style.display = "none";
+        messageEnvoyerBtn.classList.add("active");
+        messagerecuBtn.classList.remove("active")
+    }
+
+    function AfficherReceiverRecept() {
+        SenderReception.style.display = "none";
+        ReceiverReception.style.display = "block";
+        messageEnvoyerBtn.classList.remove("active");
+        messagerecuBtn.classList.add("active")
+    }
+
+    function selectEmployer() {
+        if (caseS != null) {
+            caseS.classList.remove("bg-dark", "text-white");
+            formSend.style.display = "none";
+        }
+
+        if (caseS == this) {
+            caseS.classList.remove("bg-dark", "text-white");
+            caseS = null;
+        } else {
+            this.classList.add("bg-dark", "text-white");
+            caseS = this;
+            console.log("selectionner")
+            formSend.style.display = "block";
+            idEmployerReceiver = this.getAttribute("data-id");
+        }
+
+
+        console.log(idEmployerReceiver)
+    }
+</script>
+
+{% endblock %}
