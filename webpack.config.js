@@ -16,7 +16,7 @@ Encore
 
     .setOutputPath('public/build/')
     // Indiquez ici l'URL publique du répertoire de sortie
-    .setPublicPath('https://s3-4440.nuage-peda.fr/simpleDuc/public/build')
+    .setPublicPath('https://s3-4438.nuage-peda.fr/simpleDuc/public/build')
 
     /*
      * ENTRY CONFIG
@@ -28,6 +28,8 @@ Encore
     .addEntry('annonce', './assets/annonce.js')
     .addEntry('projetjs', './assets/projet.js')
     .addEntry('connexionjs', './assets/connexion.js')
+    .addEntry('messagerie', './assets/messagerie.js')
+
 
 
 
