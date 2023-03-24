@@ -3,7 +3,7 @@ const idProjet = document.getElementById('nomProjet').getAttribute('data-id');
 const idUser = document.getElementById('nomProjet').getAttribute('data-id-user')
 const listeDo = document.getElementById('rigth');
 const listeToDo = document.getElementById('left');
-
+const url = 'http://s3-4440.nuage-peda.fr';
 
 //Ajout des event
 inputNewTache.addEventListener('change', inputAddTache);
@@ -28,7 +28,7 @@ async function deleteTache() {
 }
 
 async function deleteTacheInDb(idTache) {
-    let response = await fetch('http://s3-4440.nuage-peda.fr/simpleDuc/public/api/taches/' + idTache, {
+    let response = await fetch(url + '/simpleDuc/public/api/taches/' + idTache, {
         method: "DELETE"
     });
 
@@ -36,7 +36,7 @@ async function deleteTacheInDb(idTache) {
 
 async function updateTacheInDb(idTache, estFaite, nomTache) {
     console.log('start');
-    let response = await fetch('http://s3-4440.nuage-peda.fr/simpleDuc/public/api/taches/' + idTache, {
+    let response = await fetch(url + '/simpleDuc/public/api/taches/' + idTache, {
         method: "PATCH", // *GET, POST, PUT, DELETE, etc.
         headers: {
             "Content-Type": " application/merge-patch+json",
@@ -114,7 +114,7 @@ async function inputAddTache() {
 
 //Récupération de la liste de taches
 async function recupTaches() {
-    let response = await fetch('http://s3-4440.nuage-peda.fr/simpleDuc/public/api/projets/' + idProjet, {
+    let response = await fetch(url + '/simpleDuc/public/api/projets/' + idProjet, {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         headers: {},
 
@@ -140,7 +140,7 @@ async function getToken() {
 }
 */
 async function addNewTache(nomDeTache, isDone, idProjet, idDeveloppeur) {
-    let response = await fetch('http://s3-4440.nuage-peda.fr/simpleDuc/public/api/taches', {
+    let response = await fetch(url + '/simpleDuc/public/api/taches', {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
             "Content-Type": "application/ld+json",

@@ -8,9 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ApiResource(normalizationContext:['groups' => ['read']])]
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
+#[UniqueEntity('nomProjet',message: 'le nom de projet est déjà utiliser')]
 class Projet
 {
     #[ORM\Id]
@@ -20,7 +22,7 @@ class Projet
     private ?int $id = null;
 
     #[Groups(["read"])]
-    #[ORM\Column]
+    #[ORM\Column(name: 'nomProjet', type: 'string', length: 50, unique: true)]
     private ?string $nomProjet = null;
 
     #[ORM\Column]
