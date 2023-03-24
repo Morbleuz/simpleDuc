@@ -24,7 +24,7 @@ class EmployesFixtures extends Fixture
         $developpeur = new Developpeur();
         $developpeur->setEmail("developpeur@simpleduc.fr");
         $developpeur->setPassword("motdepasse");
-        $developpeur->setRoles(array("ROLE_DEV"));
+        $developpeur->setRoles(array("ROLE_DEV", "ROLE_EMP"));
         $developpeur->setNom("Martin");
         $developpeur->setPrenom("Tom");
         $developpeur->setRIB("FR1O32O2OI32OI");
@@ -41,7 +41,7 @@ class EmployesFixtures extends Fixture
         $developpeur = new Developpeur();
         $developpeur->setEmail("developpeur2@simpleduc.fr");
         $developpeur->setPassword("motdepasse");
-        $developpeur->setRoles(array("ROLE_DEV"));
+        $developpeur->setRoles(array("ROLE_DEV", "ROLE_EMP"));
         $developpeur->setNom("Martin");
         $developpeur->setPrenom("Tom");
         $developpeur->setRIB("FR1O32O2OI32OI");
@@ -59,7 +59,7 @@ class EmployesFixtures extends Fixture
         $resp = new ResponsableRH();
         $resp->setEmail("responsable@simpleduc.fr");
         $resp->setPassword("motdepasse");
-        $resp->setRoles(array("ROLE_RESP"));
+        $resp->setRoles(array("ROLE_RESP", "ROLE_EMP"));
         $resp->setNom("NomRH");
         $resp->setPrenom("PrenomRH");
         $resp->setRIB("FR1765765995");
@@ -78,7 +78,7 @@ class EmployesFixtures extends Fixture
         $Employe = new Employe();
         $Employe->setEmail("employe@simpleduc.fr");
         $Employe->setPassword("motdepasse");
-        $Employe->setRoles(array());
+        $Employe->setRoles(array("ROLE_EMP"));
         $Employe->setNom("NomEmp");
         $Employe->setPrenom("PrenomEmp");
         $Employe->setRIB("FR1765675995");
