@@ -10,6 +10,8 @@ use App\Form\SecurityType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Developpeur;
 use App\Entity\Projet;
+use App\Entity\Tache;
+
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -28,8 +30,11 @@ class SecurityController extends AbstractController
         }
         $user =$this->getUser();
         $projets = null;
+        $countTache = null;
         if($user instanceof Developpeur){
             $projets = $this->getDoctrine()->getRepository(Projet::class)->findByDev($user->getId());
+            $countTache = $this->getDoctrine()->getRepository(Tache::class)->getCountByDev($user->getId());
+
         }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -40,7 +45,8 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
             'loginForm' => $form->createView(),
-            'projets' => $projets
+            'projets' => $projets,
+            'countTache' => $countTache
         ]);
 
         

@@ -39,6 +39,18 @@ class TacheRepository extends ServiceEntityRepository
         }
     }
 
+    ///Retourne le nombre de tache pour un développeur
+    public function getCountByDev(int $idDev)
+    {
+        return $this->createQueryBuilder('t')
+        ->select('COUNT(t)')
+        ->leftJoin('t.developpeur', 'developpeur','WITH')     
+        ->andWhere('developpeur.id = :id')
+        ->setParameter('id', $idDev)
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return Tache[] Returns an array of Tache objects
 //     */
