@@ -5,6 +5,8 @@ const listeDo = document.getElementById('rigth');
 const listeToDo = document.getElementById('left');
 const url = 'http://s3-4440.nuage-peda.fr';
 
+//Permet de savoir si le script est en cours d'utilisation.
+var isInExec = false;
 //Ajout des event
 inputNewTache.addEventListener('change', inputAddTache);
 addEventsListeners();
@@ -64,41 +66,46 @@ async function updateTacheState() {
 
 }
 async function updateListeTache() {
-    //Clear des listes
-    while (listeDo.lastChild) {
-        listeDo.removeChild(listeDo.lastChild)
-    }
-    while (listeToDo.lastChild) {
-        listeToDo.removeChild(listeToDo.lastChild)
-    }
-    let newListeTache = await recupTaches();
-    newListeTache = newListeTache['taches'];
-    for (tache of newListeTache) {
-        let div = document.createElement('div');
-        div.setAttribute('class', 'tache');
-
-        let p = document.createElement('p');
-        p.setAttribute('data-id', tache['id']);
-        p.setAttribute('data-done', tache['estFaite']);
-        p.setAttribute('data-nomTache', tache['nomTache']);
-        p.setAttribute('class', 'item');
-
-
-        let i = document.createElement('i');
-        i.setAttribute('class', 'fa fa-trash');
-        i.setAttribute('data-id', tache['id']);
-
-        p.innerHTML = tache['nomTache'];
-        div.innerHTML = p.outerHTML + i.outerHTML;
-
-        if (tache['estFaite'] == true) {
-            listeDo.appendChild(div);
-        } else {
-            listeToDo.appendChild(div);
-
+    if (!isInExec) {
+        isInExec = true;
+        //Clear des listes
+        while (listeDo.lastChild) {
+            listeDo.removeChild(listeDo.lastChild)
         }
+        while (listeToDo.lastChild) {
+            listeToDo.removeChild(listeToDo.lastChild)
+        }
+        let newListeTache = await recupTaches();
+        newListeTache = newListeTache['taches'];
+        for (tache of newListeTache) {
+            let div = document.createElement('div');
+            div.setAttribute('class', 'tache');
+
+            let p = document.createElement('p');
+            p.setAttribute('data-id', tache['id']);
+            p.setAttribute('data-done', tache['estFaite']);
+            p.setAttribute('data-nomTache', tache['nomTache']);
+            p.setAttribute('class', 'item');
+
+
+            let i = document.createElement('i');
+            i.setAttribute('class', 'fa fa-trash');
+            i.setAttribute('data-id', tache['id']);
+
+            p.innerHTML = tache['nomTache'];
+            div.innerHTML = p.outerHTML + i.outerHTML;
+
+            if (tache['estFaite'] == true) {
+                listeDo.appendChild(div);
+            } else {
+                listeToDo.appendChild(div);
+
+            }
+        }
+        isInExec = false;
+        addEventsListeners();
     }
-    addEventsListeners();
+    console.log('programme en cours dexec');
 }
 
 ///
