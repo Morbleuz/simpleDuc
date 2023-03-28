@@ -15,12 +15,14 @@ class EmployesFixtures extends Fixture
 
     public function __construct(UserPasswordHasherInterface $passwordHasher){
         $this->passwordHasher= $passwordHasher;
- }
+    }
+
     public function load(ObjectManager $manager): void
     {
         // $product = new Product();
         // $manager->persist($product); 
-        
+
+        ///Ajout de plusieurs développeurs
         $developpeur = new Developpeur();
         $developpeur->setEmail("developpeur@simpleduc.fr");
         $developpeur->setPassword("motdepasse");
@@ -38,6 +40,8 @@ class EmployesFixtures extends Fixture
             )
         );
         $manager->persist($developpeur);
+        $this->addReference('developpeur1', $developpeur);
+
         $developpeur = new Developpeur();
         $developpeur->setEmail("developpeur2@simpleduc.fr");
         $developpeur->setPassword("motdepasse");
@@ -55,6 +59,28 @@ class EmployesFixtures extends Fixture
             )
         );
         $manager->persist($developpeur);
+        $this->addReference('developpeur2', $developpeur);
+
+
+        $developpeur = new Developpeur();
+        $developpeur->setEmail("developpeur3@simpleduc.fr");
+        $developpeur->setPassword("motdepasse");
+        $developpeur->setRoles(array("ROLE_DEV", "ROLE_EMP"));
+        $developpeur->setNom("Martin");
+        $developpeur->setPrenom("Tom");
+        $developpeur->setRIB("FR1O32O2OI32OI");
+        $developpeur->setNombreHeures(36);
+        $developpeur->setAdresse("4 rue de guymo");
+        $developpeur->setSexe("Homme");
+        $developpeur->setPassword(
+            $this->passwordHasher->hashPassword(
+                $developpeur,
+                $developpeur->getPassword()
+            )
+        );
+        $manager->persist($developpeur);
+        $this->addReference('developpeur3', $developpeur);
+
 
         $resp = new ResponsableRH();
         $resp->setEmail("responsable@simpleduc.fr");
@@ -95,8 +121,5 @@ class EmployesFixtures extends Fixture
         
 
         $manager->flush();
-
-        
-
     }
 }
